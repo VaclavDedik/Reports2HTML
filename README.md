@@ -1,4 +1,4 @@
-Reprots2HTML
+Reports2HTML
 ============
 
-Converts reports in a txt files to html files.
+Converts reports in txt files to html files.
