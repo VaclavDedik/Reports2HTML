@@ -1,16 +1,14 @@
-<body>
-    <h1>${title}</h1>
-    <div class="reports">
-        <% reports.each { key, value -> %>
-        <div class="report">
-            <h2>
-                <a href="${value.link}">${value.title}</a>
-                <% if (value?.content?.trim()?.isEmpty()) { %>
-                    [This report is empty]
-                <% } %>
-            </h2>
-            <p>${value.description}</p>
-        </div>
-        <% } %>
+<h1>${title}</h1>
+<div class="reports">
+    <% reports.each { key, value -> %>
+    <div class="report">
+        <h2>
+            <a href="${value.link}">${value.title}</a>
+            <% if (value?.content?.trim()?.isEmpty()) { %>
+                [This report is empty]
+            <% } %>
+        </h2>
+        <p>${value.description}</p>
     </div>
-</body>
+    <% } %>
+</div>
