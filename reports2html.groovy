@@ -4,12 +4,21 @@ class Main {
     static output
 
     static initReports(String reportsConfig) {
+        def dir = new File("${input}");
+        def fileNames = dir.listFiles()*.name
+
         def reports = new ConfigSlurper().parse(
                             new File(reportsConfig).toURL()
                             )["reports"]
-        reports.each { key, value ->
-            reports[key].content = new File("${input}/${key}").getText()
-            reports[key].link = "reports/${key}.html"
+
+        fileNames.each {
+            def report = [title: reports[it].title ?: it, 
+                          description: reports[it].description ?: "", 
+                          content: new File("${input}/${it}").getText(),
+                          link: "reports/${it}.html"
+                         ]
+            reports[it] = report
+            
         }
         reports
     }
@@ -22,7 +31,7 @@ class Main {
         new File("${output}").mkdir()
         new File("${output}/reports").mkdir()
 
-        def reports = initReports("reports.groovy")
+        def reports = initReports("reports-metadata.groovy")
 
         reports.each {key, value ->
             def reportBodyPage = new HtmlPage(
